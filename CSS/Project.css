@@ -1,0 +1,139 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    background-color: #1e3c72;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    max-width: 400px;
+}
+
+.menu li {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.menu .menu-title {
+    max-height: none;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 10px 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.menu .menu-title:hover {
+    color: #a3befd;
+    transform: translateX(5px);
+}
+
+.menu.active li {
+    max-height: 100px;
+    opacity: 1;
+}
+
+.menu-item {
+    padding: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.item-title {
+    display: block;
+    color: #a3befd;
+    font-weight: 500;
+    padding: 5px 0;
+    font-size: 1.2rem;
+}
+
+.item-desc {
+    color: #d1d9f5;
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 2px 0;
+}
+
+/* 프로젝트 상세 영역 */
+.project-details {
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    flex-grow: 1;
+}
+
+.project-container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.project-container.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-container h2 {
+    color: #1e3c72;
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+
+.project-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.project-container p {
+    color: #666;
+    font-size: 1rem;
+    margin: 0 0 20px 0;
+}
+
+.project-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2a5298;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-link:hover {
+    background-color: #1e3c72;
+    transform: translateY(-2px);
+}

@@ -1,0 +1,247 @@
+/* 기본 스타일 */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 인트로 화면 */
+.intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1000;
+    animation: fadeOut 1s ease forwards 2s;
+}
+
+.intro-title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+    animation: slideIn 1s ease;
+}
+
+.intro-subtitle {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeIn 1s ease 0.5s forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    min-height: 100vh;
+    opacity: 0;
+    animation: fadeInMain 1s ease forwards 3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@keyframes fadeInMain {
+    to { opacity: 1; }
+}
+
+/* 내비게이션 */
+nav {
+    background-color: #1e3c72;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    width: 20%; /* 각 메뉴가 균등하게 분포되도록 */
+}
+
+.menu li {
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.menu .menu-title {
+    max-height: none;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 5px 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu .menu-title:hover {
+    color: #a3befd;
+    transform: translateX(5px); /* 호버 시 살짝 이동 */
+}
+
+.menu.active li {
+    max-height: 100px; /* 설명 포함을 위해 높이 증가 */
+    opacity: 1;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #a3befd;
+    display: block;
+    padding: 5px 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.menu li a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+/* 메뉴 아이템 스타일 */
+.menu-item {
+    padding: 5px 0;
+}
+
+.item-title {
+    display: block;
+    color: #a3befd;
+    font-weight: 500;
+    padding: 5px 0;
+}
+
+.item-desc {
+    color: #d1d9f5;
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 2px 0;
+}
+
+/* 프로젝트 캐러셀 */
+.project-carousel {
+    position: relative;
+    max-width: 600px;
+    margin: 80px auto;
+    overflow: hidden;
+}
+
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.project-card {
+    min-width: 100%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.card-content {
+    padding: 20px 0;
+}
+
+.project-card h3 {
+    margin: 15px 0;
+    color: #1e3c72;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.project-card a {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background-color: #2a5298;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card a:hover {
+    background-color: #1e3c72;
+    transform: translateY(-2px);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(30, 60, 114, 0.8);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(30, 60, 114, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev { left: 20px; }
+.carousel-btn.next { right: 20px; }
+
+/* 푸터 */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #1e3c72;
+    color: #ffffff;
+    width: 100%;
+    flex-shrink: 0;
+}
