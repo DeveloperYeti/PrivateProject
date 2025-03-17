@@ -1,21 +1,69 @@
+// 눈 내리는 효과 추가
+const canvas = document.createElement('canvas');
+canvas.id = 'snowCanvas';
+document.body.appendChild(canvas);
+const ctx = canvas.getContext('2d');
+
+let snowflakes = [];
+const numFlakes = 100;
+
+// 캔버스 크기 설정
+function setCanvasSize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+setCanvasSize();
+window.addEventListener('resize', setCanvasSize);
+
+// 눈송이 생성
+function createSnowflakes() {
+    snowflakes = [];
+    for (let i = 0; i < numFlakes; i++) {
+        snowflakes.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            radius: Math.random() * 4 + 1,
+            speedX: Math.random() * 2 - 1,
+            speedY: Math.random() * 3 + 1,
+            opacity: Math.random()
+        });
+    }
+}
+
+// 눈 내리는 애니메이션
+function drawSnowflakes() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    
+    snowflakes.forEach(flake => {
+        ctx.beginPath();
+        ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // 눈송이 이동
+        flake.x += flake.speedX;
+        flake.y += flake.speedY;
+
+        if (flake.y > window.innerHeight) {
+            flake.y = -flake.radius;
+            flake.x = Math.random() * window.innerWidth;
+        }
+    });
+
+    requestAnimationFrame(drawSnowflakes);
+}
+
+createSnowflakes();
+drawSnowflakes();
+
 // 메뉴 토글
 const menus = document.querySelectorAll('.menu');
 menus.forEach(menu => {
     menu.addEventListener('click', function() {
         const isActive = this.classList.contains('active');
-        menus.forEach(m => {
-            m.classList.remove('active');
-            m.querySelectorAll('li').forEach(li => {
-                li.style.opacity = '0'; // 비활성화 시 투명도 초기화
-            });
-        });
+        menus.forEach(m => m.classList.remove('active'));
         if (!isActive) {
             this.classList.add('active');
-            setTimeout(() => {
-                this.querySelectorAll('li').forEach(li => {
-                    li.style.opacity = '1'; // 활성화 시 부드럽게 나타남
-                });
-            }, 50); // 약간의 지연으로 자연스러운 전환
         }
     });
 });
@@ -28,6 +76,7 @@ const nextBtn = document.querySelector('.next');
 let currentIndex = 0;
 
 function updateSlide() {
+    if (slides.length === 0) return;
     const slideWidth = slides[0].clientWidth;
     slideContainer.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
@@ -54,14 +103,22 @@ updateSlide();
 // 인트로 제거 및 초기 메뉴 설정
 setTimeout(() => {
     const intro = document.querySelector('.intro');
-    intro.style.display = 'none';
+    if (intro) {
+        intro.style.animation = 'fadeOut 1.5s ease forwards';
+        setTimeout(() => {
+            intro.style.display = 'none';
+        }, 1500);
+    }
     document.body.style.height = '100%';
     window.dispatchEvent(new Event('resize'));
-    // 첫 번째 메뉴 자동 활성화 (선택적)
-    menus[0].classList.add('active');
-    menus[0].querySelectorAll('li').forEach(li => {
-        li.style.opacity = '1';
-    });
+    
+    // 첫 번째 메뉴 자동 활성화
+    if (menus.length > 0) {
+        menus[0].classList.add('active');
+        menus[0].querySelectorAll('li').forEach(li => {
+            li.style.opacity = '1';
+        });
+    }
 }, 3000);
 
 // 창 크기 조정 시 캐러셀 업데이트
